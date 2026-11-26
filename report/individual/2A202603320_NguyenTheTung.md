@@ -24,7 +24,7 @@
   s05f13: cấu hình chọn {'score_thr': '0.5', 'min_points': '10'} → 4.9 (tốt nhất có thể 3.4)
 ```
 
-- Cấu hình có ổn định trên từng frame không? Vì sao tôi vẫn chọn (hoặc không chọn) nó: Không hoàn toàn ổn định: khi bỏ `s04f02` hoặc `s05f13`, cấu hình chọn từ 2 frame còn lại là `0.5/10`. Tuy nhiên `0.5/10` làm tăng box sót từ 8 lên 11 (mỗi cái tốn 1.0) nên tổng chỉ hơn 0.1 (14.3 so với 14.2); trên chính 2 frame đó, `0.4/10` cho 4.8 và 3.5, thấp hơn hoặc bằng mức leave-one-out báo. Với 3 frame tune nên tôi giữ `0.4/10` vì cân bằng xóa/sót hơn.
+- Cấu hình có ổn định trên từng frame không? Vì sao tôi vẫn chọn (hoặc không chọn) nó: Không hoàn toàn ổn định: khi bỏ `s04f02` hoặc `s05f13`, cấu hình chọn từ 2 frame còn lại là `0.5/10`. Tuy nhiên `0.5/10` làm tăng box sót từ 8 lên 11 (mỗi cái tốn 1.0) nên tổng chỉ hơn 0.1 (14.3 so với 14.2); trên chính 2 frame đó, `0.4/10` cho 4.8 và 3.5, thấp hơn hoặc bằng mức leave-one-out báo. Với 3 frame tune nên tôi giữ `0.4/10` vì cân bằng xóa/sót hơn. Khi thử ngưỡng `0.5`, model vẫn bắt `Car` tốt nhưng kém rõ ở `Pedestrian`, `Bus` và `Truck` — các box của ba lớp này bị bỏ sót nhiều hơn, nên dù tổng chi phí chỉ hơn 0.1 tôi không chọn ngưỡng đó.
 
 ## 3. Trước/sau (bước 8)
 
