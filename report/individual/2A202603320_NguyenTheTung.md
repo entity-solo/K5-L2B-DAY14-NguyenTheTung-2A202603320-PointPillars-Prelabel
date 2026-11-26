@@ -24,7 +24,7 @@
   s05f13: cấu hình chọn {'score_thr': '0.5', 'min_points': '10'} → 4.9 (tốt nhất có thể 3.4)
 ```
 
-- Cấu hình có ổn định trên từng frame không? Vì sao tôi vẫn chọn (hoặc không chọn) nó: Không hoàn toàn ổn định: khi bỏ `s04f02` hoặc `s05f13`, cấu hình chọn từ 2 frame còn lại là `0.5/10`. Tuy nhiên `0.5/10` làm tăng box sót từ 8 lên 11 (mỗi cái tốn 1.0) nên tổng chỉ hơn 0.1 (14.3 so với 14.2); trên chính 2 frame đó, `0.4/10` cho 4.8 và 3.5, thấp hơn hoặc bằng mức leave-one-out báo. Với 3 frame tune nên tôi giữ `0.4/10` vì cân bằng xóa/sót hơn. Ngưỡng đã thử ở batch A là `0.5` với `min_points=10`: `Car` sạch hơn (phải xóa 13 → 8) nhưng các lớp nhỏ vẫn yếu — `Pedestrian` sót 6 (so với 5 ở `0.4`), `Bus` sót 1 (bằng nhau), `Truck` sót 1 (trong khi `0.4` chỉ phải sửa 1), bản thân `Car` cũng bắt đầu sót thêm 1 box. Tổng chi phí 14.3, hơn 0.1 so với 14.2 của `0.4/10`, nên tôi không chọn ngưỡng này.
+- Cấu hình có ổn định trên từng frame không? Vì sao tôi vẫn chọn (hoặc không chọn) nó: Không hoàn toàn ổn định: khi bỏ `s04f02` hoặc `s05f13`, cấu hình chọn từ 2 frame còn lại là `0.5/10`. Tuy nhiên `0.5/10` làm tăng box sót từ 8 lên 11 (mỗi cái tốn 1.0) nên tổng chỉ hơn 0.1 (14.3 so với 14.2); trên chính 2 frame đó, `0.4/10` cho 4.8 và 3.5, thấp hơn hoặc bằng mức leave-one-out báo. Với 3 frame tune nên tôi giữ `0.4/10` vì cân bằng xóa/sót hơn. Ở config gốc của batch A là `score_thr=0.1, min_points=0`, model bắt `Car` tốt (không sót box nào, nhưng thừa tới 26 box) và kém hơn ở `Pedestrian`, `Bus`, `Truck`: `Pedestrian` sót 4 và phải sửa 1, `Bus` sót 1, `Truck` phải sửa 1. Đây là lý do tôi ưu tiên cắt box `Car` thừa bằng `score_thr=0.4, min_points=10`, dù ngưỡng mới làm sót thêm vài box nhỏ.
 
 ## 3. Trước/sau (bước 8)
 
